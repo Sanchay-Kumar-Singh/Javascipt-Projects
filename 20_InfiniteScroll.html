@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:Arial">
+    <div id="container"></div>
+    <script>
+        let count = 1;
+        function loadItems() {
+            for (let i = 0; i < 100; i++) {
+                let p = document.createElement("p");
+                p.innerText = "Item " + count++;
+                document.getElementById("container").appendChild(p);
+            }
+        }
+        loadItems();
+
+        window.addEventListener("scroll", () => {
+            if (window.innerHeight + window.scrollY >= document.body.offsetHeight) {
+                loadItems();
+            }
+        });
+    </script>
+</body>
+
+</html>

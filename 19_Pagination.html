@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<body style="text-align:center">
+
+    <div id="content"></div>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+
+    <script>
+        let items = ["Page 1", "Page 2", "Page 3", "Page 4"];
+        let page = 0;
+
+        function show() {
+            document.getElementById("content").innerText = items[page];
+        }
+
+        function next() {
+            if (page < items.length - 1) page++;
+            show();
+        }
+
+        function prev() {
+            if (page > 0) page--;
+            show();
+        }
+
+        show();
+    </script>
+
+</body>
+
+</html>

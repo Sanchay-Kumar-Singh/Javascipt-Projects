@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center">
+    <input type="email" id="email" placeholder="Enter email">
+    <button onclick="validate()">Submit</button>
+    <p id="msg"></p>
+
+    <script>
+        function validate() {
+            let email = document.getElementById("email").value;
+            let msg = document.getElementById("msg");
+            
+            if (email.includes("@")) {
+                msg.innerText = "Valid Email";
+            } else {
+                msg.innerText = "Invalid Email";
+            }
+        }
+    </script>
+
+</body>
+
+</html>

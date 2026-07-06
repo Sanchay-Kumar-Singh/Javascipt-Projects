@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Debounce Search Example</title>
+  <style>
+ 
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Debounce Search Demo</h2>
+  <input type="text" id="searchBox" placeholder="Type something...">
+  <div class="result" id="result">Waiting for input...</div>
+</div>
+
+<script>
+  function debounce(fn, delay){
+      let timer;
+
+      return function(...args){
+          clearTimeout(timer);
+
+          timer = setTimeout(() => {
+              fn.apply(this, args);
+          }, delay);
+      };
+  }
+
+  function searchData(event){
+      const value = event.target.value;
+      document.getElementById("result").innerText =
+          "Searching for: " + value;
+  }
+
+  const searchBox = document.getElementById("searchBox");
+
+  searchBox.addEventListener(
+      "keyup",
+      debounce(searchData, 2000)
+  );
+</script>
+
+</body>
+</html>

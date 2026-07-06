@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center">
+    <div id="drag" draggable="true" style="width:100px;height:100px;background:skyblue;margin:auto">
+        Drag me
+    </div>
+    <div id="drop" style="width:200px;height:150px;border:2px dashed;margin:20px auto"></div>
+
+    <script>
+        drag.ondragstart = e => e.dataTransfer.setData("text", "drag");
+        drop.ondragover = e => e.preventDefault();
+        drop.ondrop = e => {
+            e.preventDefault();
+            drop.appendChild(drag);
+        }
+    </script>
+
+</body>
+
+</html>

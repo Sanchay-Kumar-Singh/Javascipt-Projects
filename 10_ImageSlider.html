@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<body style="text-align:center;font-family:Arial">
+
+    <img id="slider" width="300"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJntfVSWoEsUTGSOn-WXxizRMXlJrEXKZfJg&s">
+    <br><br>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+    <script>
+        const images = [
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJntfVSWoEsUTGSOn-WXxizRMXlJrEXKZfJg&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQplXgxpZtkXwosBVku4zWZxVjK0-hU3PhLHA&s",
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS7Q91gNz6182FTy1Ln2ZFXtfOFdOJpanp9nQ&s"
+        ];
+
+        let index = 0;
+
+        function showImage() {
+            document.getElementById("slider").src = images[index];
+        }
+
+        function next() {
+            index = (index + 1) % images.length;
+            showImage();
+        }
+
+        function prev() {
+            index = (index - 1 + images.length) % images.length;
+            showImage();
+        }
+        showImage();
+    </script>
+
+</body>
+
+</html>

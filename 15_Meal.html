@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal API</title>
+  <style>
+    body{
+      font-family: Arial;
+      background:#f2f2f2;
+      padding:20px;
+    }
+
+    h1{
+      text-align:center;
+      margin-bottom:30px;
+    }
+
+    .container{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:20px;
+    }
+
+    .card{
+      background:white;
+      border-radius:10px;
+      overflow:hidden;
+      box-shadow:0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .card img{
+      width:100%;
+      height:220px;
+      object-fit:cover;
+    }
+
+    .content{
+      padding:15px;
+    }
+
+    .category{
+      color:green;
+      font-weight:bold;
+    }
+
+    .area{
+      color:#555;
+    }
+
+    .desc{
+      font-size:14px;
+      color:#666;
+    }
+
+    template{
+      display:none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Meal API Data</h1>
+
+  <div class="container" id="mealContainer"></div>
+
+  <!-- HTML card template -->
+  <template id="mealTemplate">
+    <div class="card">
+      <img class="mealImage" src="" alt="">
+      <div class="content">
+        <h3 class="mealName"></h3>
+        <p class="category mealCategory"></p>
+        <p class="area mealArea"></p>
+        <p class="desc mealDesc"></p>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    const container = document.getElementById("mealContainer");
+    const template = document.getElementById("mealTemplate");
+
+    async function getMeals() {
+      const response = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=a");
+      const data = await response.json();
+
+      data.meals.forEach(meal => {
+        const clone = template.content.cloneNode(true);
+        
+        clone.querySelector(".mealImage").src = meal.strMealThumb;
+        clone.querySelector(".mealName").innerText = meal.strMeal;
+        clone.querySelector(".mealCategory").innerText = meal.strCategory;
+        clone.querySelector(".mealArea").innerText = meal.strArea;
+        clone.querySelector(".mealDesc").innerText = meal.strInstructions.slice(0,100) + "...";
+
+        container.appendChild(clone);
+      });
+    }
+
+    getMeals();
+  </script>
+
+</body>
+</html>>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meal API</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    padding:20px;
+    text-align:center;
+}
+
+button{
+    padding:10px 20px;
+    margin:20px;
+    cursor:pointer;
+}
+
+.card{
+    width:300px;
+    margin:auto;
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 4px 8px rgba(0,0,0,.2);
+    display:none;
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.content{
+    padding:15px;
+}
+
+.category{
+    color:green;
+    font-weight:bold;
+}
+
+.area{
+    color:#555;
+}
+
+</style>
+
+</head>
+<body>
+
+<h1>Meal API</h1>
+
+<button id="btn">Show Random Meal</button>
+
+<div class="card" id="mealCard">
+
+    <img id="mealImage">
+
+    <div class="content">
+
+        <h3 id="mealName"></h3>
+
+        <p class="category" id="mealCategory"></p>
+
+        <p class="area" id="mealArea"></p>
+
+    </div>
+
+</div>
+
+<script>
+
+const btn = document.getElementById("btn");
+
+const mealCard = document.getElementById("mealCard");
+const mealImage = document.getElementById("mealImage");
+const mealName = document.getElementById("mealName");
+const mealCategory = document.getElementById("mealCategory");
+const mealArea = document.getElementById("mealArea");
+
+btn.addEventListener("click", fetchMeal);
+
+async function fetchMeal(){
+
+    try{
+
+        const response = await fetch("https://www.themealdb.com/api/json/v1/1/search.php?f=a");
+
+        if(!response.ok){
+
+            throw new Error("Failed to Fetch Data");
+
+        }
+
+        const data = await response.json();
+
+        const randomIndex = Math.floor(Math.random() * data.meals.length);
+
+        const meal = data.meals[randomIndex];
+
+        showMeal(meal);
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+    }
+
+}
+
+function showMeal(meal){
+
+    mealImage.src = meal.strMealThumb;
+    mealImage.alt = meal.strMeal;
+
+    mealName.textContent = meal.strMeal;
+
+    mealCategory.textContent = "Category : " + meal.strCategory;
+
+    mealArea.textContent = "Area : " + meal.strArea;
+
+    mealCard.style.display = "block";
+
+}
+
+</script>
+
+</body>
+</html>

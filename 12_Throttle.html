@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Throttle Demo</title>
+  <style>
+    .box {
+      border: 2px black solid;
+      width: 400px;
+      height: 200px;
+
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Throttle Mouse Move Demo</h2>
+    <p>Move your mouse inside the box</p>
+    <div class="box" id="box">Waiting...</div>
+    <div class="info">Updates only once every 1 second</div>
+  </div>
+
+  <script>
+    function throttle(fn, delay) {
+      let lastCall = 0;
+
+      return function (...args) {
+        const now = new Date().getTime();
+
+        if (now - lastCall >= delay) {
+          lastCall = now;
+          fn.apply(this, args);
+        }
+      };
+    }
+
+    function showPosition(event) {
+      document.getElementById("box").innerText =
+        `X: ${event.clientX}, Y: ${event.clientY}`;
+    }
+
+    const box = document.getElementById("box");
+
+    box.addEventListener(
+      "mousemove",
+      throttle(showPosition, 1000)
+    );
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Todo App</title>
+
+<style>
+body{
+    font-family: Arial;
+    text-align: center;
+    margin-top: 50px;
+}
+
+input{
+    padding: 10px;
+    width: 220px;
+}
+
+button{
+    padding: 10px;
+    cursor: pointer;
+}
+
+li{
+    list-style: none;
+    margin: 10px;
+}
+</style>
+
+</head>
+<body>
+
+<h2>Todo App</h2>
+
+<input type="text" id="taskInput" placeholder="Enter Task">
+<button onclick="addTask()">Add</button>
+
+<ul id="taskList"></ul>
+
+<script>
+
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+showTasks();
+
+function addTask(){
+
+    let input = document.getElementById("taskInput");
+
+    let task = input.value.trim();
+
+    if(task === ""){
+        return;
+    }
+
+    tasks.push(task);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    input.value = "";
+
+    showTasks();
+}
+
+function showTasks(){
+
+    let list = document.getElementById("taskList");
+
+    list.innerHTML = "";
+
+    tasks.forEach(function(task, index){
+
+        let li = document.createElement("li");
+
+        li.textContent = task + " ";
+
+        let btn = document.createElement("button");
+
+        btn.textContent = "Delete";
+
+        btn.onclick = function(){
+            deleteTask(index);
+        };
+
+        li.appendChild(btn);
+
+        list.appendChild(li);
+
+    });
+
+}
+
+function deleteTask(index){
+
+    tasks.splice(index, 1);
+
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+
+    showTasks();
+
+}
+
+</script>
+
+</body>
+</html>
