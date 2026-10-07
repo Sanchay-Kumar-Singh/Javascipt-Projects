@@ -10,3 +10,6 @@ for (let char of str) {
 }
 
 console.log(frequency);
+
+//JAVA Solutions
+

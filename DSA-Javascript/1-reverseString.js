@@ -7,11 +7,15 @@ console.log(reverse);
 
 // Java Solution
 
-// const str = "hello";
-// let result = "";
+// class Main {
+//     public static void main(String[] args) {
+//         String str = "Sanchay";
+//         String reverse = "";
 
-// for (let i = str.length - 1; i >= 0; i--) {
-//     result += str[i];
+//         for (int i = str.length() - 1; i >= 0; i--) {
+//             reverse += str.charAt(i);
+//         }
+
+//         System.out.println(reverse);
+//     }
 // }
-
-// console.log(result);
